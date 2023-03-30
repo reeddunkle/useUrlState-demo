@@ -33,6 +33,7 @@ function App() {
               {lang}
             </button>
           ))}
+          <button onClick={() => setCompany(null)}>Clear</button>
         </div>
         <a className="App-link language-text" href="/">
           {company}
