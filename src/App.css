@@ -17,15 +17,17 @@
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(20px + 2vmin);
   color: white;
 }
 
 .App-link {
   color: #61dafb;
+  display: inline-block;
+  margin-left: 20px;
+  width: 340px;
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +37,26 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+button {
+  background: transparent;
+  border-radius: 0.12rem;
+  border: 0.1rem solid #ffffff;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  height: 5rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s;
+  width: 150px;
+}
+
+button:hover {
+  background-color: #ffffff;
+  color: #000000;
 }
