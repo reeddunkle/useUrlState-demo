@@ -1,5 +1,43 @@
 .App {
-  text-align: center;
+  background-color: #282c34;
+  color: white;
+  font-size: calc(20px + 2vmin);
+  min-height: 100vh;
+}
+
+.url-text {
+  font-size: 2rem;
+  grid-area: url-text;
+}
+
+.language-buttons {
+  grid-area: language-buttons;
+}
+
+.language-text {
+  grid-area: language-text;
+}
+
+.animal-text {
+  grid-area: animal-text;
+}
+
+.animal-buttons { 
+  grid-area: animal-buttons;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "url-text url-text"
+    "language-buttons language-text"
+    "animal-buttons animal-text";
+  row-gap: 6rem;
+  margin: 0 auto;
+  padding-top: 4rem;
+  width: 900px;
 }
 
 .App-logo {
@@ -11,16 +49,6 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(20px + 2vmin);
-  color: white;
 }
 
 .App-link {

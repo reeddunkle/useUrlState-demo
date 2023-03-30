@@ -8,7 +8,7 @@ const animals = ["Cat", "Dog", "Rock"];
 function App() {
   const [urlState, setUrlState] = useUrlState();
 
-  const { company = "React", pet = "Cat" } = urlState;
+  const { company = "React", pet = "" } = urlState;
 
   const setCompany = (comp) => {
     setUrlState({
@@ -25,29 +25,30 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div>
+      <div className="grid-container">
+        <div className="url-text">{window.location.toString()}</div>
+        <div className="language-buttons">
           {languages.map((lang) => (
             <button key={lang} onClick={() => setCompany(lang)}>
               {lang}
             </button>
           ))}
-          <a className="App-link" href="/">
-            {company}
-          </a>
         </div>
-        <div>
+        <a className="App-link language-text" href="/">
+          {company}
+        </a>
+        <div className="animal-buttons">
           {animals.map((animal) => (
             <button key={animal} onClick={() => setPet(animal)}>
               {animal}
             </button>
           ))}
           <button onClick={() => setPet(null)}>Clear</button>
-          <a className="App-link" href="/">
-            {pet}
-          </a>
         </div>
-      </header>
+        <a className="App-link animal-text" href="/">
+          {pet}
+        </a>
+      </div>
     </div>
   );
 }
