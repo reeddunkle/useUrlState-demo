@@ -18,8 +18,12 @@ const isPresent = (value) => {
   return !isNil(value);
 };
 
-const isNumber = (v) => {
-  return !isNaN(Number(v));
+const isEmpty = (value) => {
+  return !isPresent(value) || Object.entries(value).length === 0;
+};
+
+const isNumber = (value = "") => {
+  return !isEmpty(value) && !isNaN(Number(value));
 };
 
 const filterObject = (obj = {}, predicate = identity) => {
@@ -56,6 +60,8 @@ const cond = (conditionPairs = []) => {
 };
 
 const isStringArray = (str = "") => str.includes(",");
+const isStringNull = (str = "") => str === "null";
+const isStringUndefined = (str = "") => str === "undefined";
 
 const ensureLeadingQuestion = (str = "") => {
   return str[0] === "?" ? str : `?${str}`;
@@ -65,7 +71,7 @@ const wrapArrayBrackets = (str = "") => {
   return `[${str}]`;
 };
 
-const parseArrayString = (arrayString = "") => {
+const parseStringArray = (arrayString = "") => {
   return JSON.parse(wrapArrayBrackets(arrayString));
 };
 
@@ -95,8 +101,11 @@ const stringify = (obj = {}) => {
 };
 
 const parseValue = cond([
-  [isStringArray, parseArrayString],
+  [isStringArray, parseStringArray],
   [isNumber, Number],
+  [isStringNull, () => null],
+  [isStringUndefined, () => undefined],
+  [isEmpty, () => null],
   [stubTrue, identity],
 ]);
 
@@ -120,8 +129,9 @@ export {
   flow,
   filterObject,
   identity,
-  isPresent,
+  isEmpty,
   isFunction,
+  isPresent,
   queryString,
   updateUrlQuery,
 };
