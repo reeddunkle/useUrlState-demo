@@ -30,8 +30,7 @@ function useUrlState(initialState = {}, options = {}) {
 
   const [urlState, setReturnState] = useState(() => {
     const initState = isFunction(initialState) ? initialState() : initialState;
-    const currentSearchString = getSearchString();
-    const currentUrlState = deserialize(currentSearchString);
+    const currentUrlState = deserialize(getSearchString());
 
     return {
       ...initState,
