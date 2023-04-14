@@ -67,9 +67,9 @@ const flow = (funcs = []) => {
 
 const cond = (conditionPairs = []) => {
   return (...args) => {
-    for (const [predicate, execution] of conditionPairs) {
+    for (const [predicate, callback] of conditionPairs) {
       if (predicate(...args)) {
-        return execution(...args);
+        return callback(...args);
       }
     }
 

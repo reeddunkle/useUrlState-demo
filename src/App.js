@@ -1,6 +1,18 @@
 import "./App.css";
 import useUrlState from "./useUrlState";
 
+// Util
+const noop = () => {};
+
+const Button = ({ children, onClick = noop, ...rest }) => {
+  return (
+    <button className="button" onClick={onClick} {...rest}>
+      {children}
+    </button>
+  );
+};
+
+// Data
 const languages = ["React", "Svelte", "Visual Basic"];
 
 const animals = ["Cat", "Dog", "Rock"];
@@ -27,24 +39,26 @@ function App() {
     <div className="App">
       <div className="grid-container">
         <div className="url-text">{window.location.toString()}</div>
+        <div className="input-label">Set</div>
+        <div className="output-label">Get</div>
         <div className="language-buttons">
           {languages.map((lang) => (
-            <button key={lang} onClick={() => setCompany(lang)}>
+            <Button key={lang} onClick={() => setCompany(lang)}>
               {lang}
-            </button>
+            </Button>
           ))}
-          <button onClick={() => setCompany(null)}>Clear</button>
+          <Button onClick={() => setCompany(null)}>Clear</Button>
         </div>
         <a className="App-link language-text" href="/">
           {company}
         </a>
         <div className="animal-buttons">
           {animals.map((animal) => (
-            <button key={animal} onClick={() => setPet(animal)}>
+            <Button key={animal} onClick={() => setPet(animal)}>
               {animal}
-            </button>
+            </Button>
           ))}
-          <button onClick={() => setPet(null)}>Clear</button>
+          <Button onClick={() => setPet(null)}>Clear</Button>
         </div>
         <a className="App-link animal-text" href="/">
           {pet}

@@ -10,19 +10,37 @@
   grid-area: url-text;
 }
 
+.input-label { 
+  border-bottom: 1px solid gray;
+  grid-area: input-label;
+  text-align: center;
+}
+
+.output-label {
+  border-bottom: 1px solid gray;
+  grid-area: output-label;
+  text-align: center;
+}
+
 .language-buttons {
+  background: rgba(0, 128, 0, .2);
+  border-right: 1px solid green;
   grid-area: language-buttons;
 }
 
 .language-text {
+  background: rgba(0, 128, 0, .2);
   grid-area: language-text;
 }
 
 .animal-text {
+  background: rgba(140, 48, 176, .2);
   grid-area: animal-text;
 }
 
 .animal-buttons { 
+  background: rgba(140, 48, 176, .2);
+  border-right: 1px solid #8c30b0;
   grid-area: animal-buttons;
 }
 
@@ -32,42 +50,23 @@
   grid-template-rows: auto;
   grid-template-areas:
     "url-text url-text"
+    "input-label output-label"
     "language-buttons language-text"
     "animal-buttons animal-text";
-  row-gap: 6rem;
+  row-gap: 1rem;
   margin: 0 auto;
   padding-top: 4rem;
   width: 900px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-link {
   color: #61dafb;
   display: inline-block;
-  margin-left: 20px;
+  padding-left: 20px;
   width: 340px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-button {
+.button {
   background: transparent;
   border-radius: 0.12rem;
   border: 0.1rem solid #ffffff;
