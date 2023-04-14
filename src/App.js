@@ -49,7 +49,7 @@ function App() {
           ))}
           <Button onClick={() => setCompany(null)}>Clear</Button>
         </div>
-        <a className="App-link language-text" href="/">
+        <a className="language-text link" href="/">
           {company}
         </a>
         <div className="animal-buttons">
@@ -60,7 +60,7 @@ function App() {
           ))}
           <Button onClick={() => setPet(null)}>Clear</Button>
         </div>
-        <a className="App-link animal-text" href="/">
+        <a className="animal-text link" href="/">
           {pet}
         </a>
       </div>
