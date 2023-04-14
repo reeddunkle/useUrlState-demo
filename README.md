@@ -3,7 +3,7 @@
 ## Links
 
 1. **Example 1** <br />
-   https://useurlstate.netlify.app/?company=Svelte&pet=Cat
+   https://useurlstate.netlify.app/?language=Svelte&pet=Cat
 
    - Repo: https://github.com/reeddunkle/useUrlState-demo
 
