@@ -1,3 +1,5 @@
+const noop = () => {};
+
 const negate = (predicate) => {
   return (...args) => !predicate(...args);
 };
@@ -67,13 +69,10 @@ const flow = (funcs = []) => {
 
 const cond = (conditionPairs = []) => {
   return (...args) => {
-    for (const [predicate, callback] of conditionPairs) {
-      if (predicate(...args)) {
-        return callback(...args);
-      }
-    }
+    const [, callback = noop] =
+      conditionPairs.find(([predicate = noop]) => predicate(...args)) ?? [];
 
-    return;
+    return callback(...args);
   };
 };
 
