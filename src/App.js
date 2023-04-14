@@ -20,11 +20,11 @@ const animals = ["Cat", "Dog", "Rock"];
 function App() {
   const [urlState, setUrlState] = useUrlState();
 
-  const { company = "React", pet = "" } = urlState;
+  const { language = "React", pet = "" } = urlState;
 
-  const setCompany = (comp) => {
+  const setLanguage = (lang) => {
     setUrlState({
-      company: comp,
+      language: lang,
     });
   };
 
@@ -43,14 +43,14 @@ function App() {
         <div className="output-label">Get</div>
         <div className="language-buttons">
           {languages.map((lang) => (
-            <Button key={lang} onClick={() => setCompany(lang)}>
+            <Button key={lang} onClick={() => setLanguage(lang)}>
               {lang}
             </Button>
           ))}
-          <Button onClick={() => setCompany(null)}>Clear</Button>
+          <Button onClick={() => setLanguage(null)}>Clear</Button>
         </div>
         <a className="language-text link" href="/">
-          {company}
+          {language}
         </a>
         <div className="animal-buttons">
           {animals.map((animal) => (
