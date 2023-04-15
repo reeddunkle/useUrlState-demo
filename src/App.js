@@ -4,9 +4,9 @@ import useUrlState from "./useUrlState";
 // Util
 const noop = () => {};
 
-const Button = ({ children, onClick = noop, ...rest }) => {
+const Button = ({ children, onClick = noop, ...props }) => {
   return (
-    <button className="button" onClick={onClick} {...rest}>
+    <button className="button" onClick={onClick} {...props}>
       {children}
     </button>
   );
