@@ -20,6 +20,7 @@ const animals = ["Cat", "Dog", "Rock"];
 function App() {
   const [urlState, setUrlState] = useUrlState();
 
+  // console.log("[App] urlState", urlState);
   const { language = "React", pet = "" } = urlState;
 
   const setLanguage = (lang) => {
