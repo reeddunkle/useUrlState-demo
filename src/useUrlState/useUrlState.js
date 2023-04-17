@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useRef } from "react";
 
-import { useNavigate, useSearchParams } from "../hooks";
+import useNavigate from "./useNavigate";
+import useSearchParams from "./useSearchParams";
 import { isFunction, queryString } from "./util";
 
 function useUrlState(initialState = {}, options = {}) {
@@ -42,7 +43,10 @@ function useUrlState(initialState = {}, options = {}) {
         ...nextState,
       });
 
-      navigate("?" + query, replace || options.replace);
+      navigate(
+        window.location.pathname + "?" + query,
+        replace || options.replace
+      );
     },
     [deserialize, navigate, options.replace, searchString, serialize]
   );
