@@ -1,14 +1,13 @@
 import { useCallback, useMemo, useRef } from "react";
 
-import useNavigate from "./useNavigate";
-import useSearchParams from "./useSearchParams";
-import { isFunction, queryString } from "./util";
+import { getQueryNavigation, isFunction, queryString } from "./util";
 
-function useUrlState(initialState = {}, options = {}) {
-  const navigate = useNavigate();
-  const searchParams = useSearchParams();
-  const searchString = searchParams.toString();
-
+function useUrlState(
+  initialState = {},
+  onStateChange,
+  searchString,
+  options = {}
+) {
   const serialize = useMemo(() => {
     return options.serialize ?? queryString.stringify;
   }, [options]);
@@ -21,34 +20,31 @@ function useUrlState(initialState = {}, options = {}) {
     isFunction(initialState) ? initialState() : initialState
   );
 
+  const hasInitRef = useRef(false);
+
   const urlState = useMemo(() => {
     const currentUrlState = deserialize(searchString);
 
     return {
-      ...initialStateRef.current,
+      ...(hasInitRef.current ? {} : initialStateRef.current),
       ...currentUrlState,
     };
   }, [deserialize, searchString]);
 
   const setUrlState = useCallback(
-    (newState, replace) => {
-      const currentUrlState = deserialize(searchString);
+    (nextState, stateChangeOptions) => {
+      const query = serialize(
+        isFunction(nextState) ? nextState(urlState) : nextState
+      );
 
-      const nextState = isFunction(newState)
-        ? newState(currentUrlState)
-        : newState;
+      hasInitRef.current = true;
 
-      const query = serialize({
-        ...currentUrlState,
-        ...nextState,
-      });
-
-      navigate(
-        window.location.pathname + "?" + query,
-        replace || options.replace
+      onStateChange(
+        getQueryNavigation(window?.location.toString(), query),
+        stateChangeOptions
       );
     },
-    [deserialize, navigate, options.replace, searchString, serialize]
+    [onStateChange, serialize, urlState]
   );
 
   return [urlState, setUrlState];

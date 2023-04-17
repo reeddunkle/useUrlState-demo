@@ -1,4 +1,4 @@
-import useUrlState from "./useUrlState";
+import useUrlState from "./useUrlStateWrapper";
 
 import { SearchParamsProvider } from "./useSearchParams";
 

@@ -1,5 +1,6 @@
 import "./App.css";
 import useUrlState from "./useUrlState";
+import useNavigate from "./useUrlState/useNavigate";
 
 // Util
 const noop = () => {};
@@ -18,10 +19,10 @@ const languages = ["React", "Svelte", "Visual Basic"];
 const animals = ["Cat", "Dog", "Rock"];
 
 function App() {
-  const [urlState, setUrlState] = useUrlState();
+  const [urlState, setUrlState] = useUrlState({ language: "React" });
+  const navigate = useNavigate();
 
-  // console.log("[App] urlState", urlState);
-  const { language = "React", pet = "" } = urlState;
+  const { language = "", pet = "" } = urlState;
 
   const setLanguage = (lang) => {
     setUrlState({
@@ -64,6 +65,7 @@ function App() {
         <a className="animal-text link" href="/">
           {pet}
         </a>
+        <Button onClick={() => navigate("/")}>Clear All</Button>
       </div>
     </div>
   );
