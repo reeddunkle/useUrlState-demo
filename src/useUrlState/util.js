@@ -10,16 +10,16 @@ const stubFalse = () => false;
 
 const identity = (value) => value;
 
-const isFunction = (value) => typeof value === 'function';
+const isFunction = (value) => typeof value === "function";
 
 const isNull = (value) => value === null;
 
 const isUndefined = (value) => {
-  return typeof value === 'undefined';
+  return typeof value === "undefined";
 };
 
 const isString = (value) => {
-  return typeof value === 'string';
+  return typeof value === "string";
 };
 
 const isNil = (value) => {
@@ -35,7 +35,7 @@ const isEmpty = (value) => {
 const isNumber = (value) => {
   return isString(value)
     ? !isEmpty(value) && !isNaN(Number(value))
-    : typeof value === 'number';
+    : typeof value === "number";
 };
 
 const overEvery = (predicates = []) => {
@@ -59,11 +59,11 @@ const cond = (conditionPairs = []) => {
   };
 };
 
-const isStringArray = (str = '') => str.includes(',');
-const isStringNull = (str = '') => str === 'null';
-const isStringUndefined = (str = '') => str === 'undefined';
-const isStringTrue = (str = '') => str === 'true';
-const isStringFalse = (str = '') => str === 'false';
+const isStringArray = (str = "") => str.includes(",");
+const isStringNull = (str = "") => str === "null";
+const isStringUndefined = (str = "") => str === "undefined";
+const isStringTrue = (str = "") => str === "true";
+const isStringFalse = (str = "") => str === "false";
 
 const stringPrimitivePairs = [
   [isNumber, Number],
@@ -74,7 +74,7 @@ const stringPrimitivePairs = [
 ];
 
 const isStringPrimitive = overSome(
-  stringPrimitivePairs.map(([predicate]) => predicate),
+  stringPrimitivePairs.map(([predicate]) => predicate)
 );
 
 const parseStringPrimitive = cond([
@@ -82,8 +82,8 @@ const parseStringPrimitive = cond([
   [stubTrue, identity],
 ]);
 
-const parseStringArray = (arrayString = '') => {
-  return arrayString.split(',').map(parseStringPrimitive);
+const parseStringArray = (arrayString = "") => {
+  return arrayString.split(",").map(parseStringPrimitive);
 };
 
 const alphaByKey = ([keyA], [keyB]) => keyA.localeCompare(keyB);
@@ -92,14 +92,14 @@ const shouldInclude = overEvery([isPresent, negate(isEmpty)]);
 
 const stringify = (obj = {}) => {
   const filteredEntries = Object.entries(obj).filter(([_, value]) =>
-    shouldInclude(value),
+    shouldInclude(value)
   );
 
   const sortedEntries = filteredEntries.sort(alphaByKey);
   const searchParams = new URLSearchParams(sortedEntries);
   const searchParamsString = searchParams.toString();
 
-  const decodedSearchParamsString = searchParamsString.replace(/%2C/g, ',');
+  const decodedSearchParamsString = searchParamsString.replace(/%2C/g, ",");
 
   return decodedSearchParamsString;
 };
@@ -133,22 +133,22 @@ const parse = (queryString) => {
 
 const queryString = { parse, stringify };
 
-const ensureLeadingQuestion = (str = '') => {
-  return str[0] === '?' ? str : `?${str}`;
+const ensureLeadingQuestion = (str = "") => {
+  return str[0] === "?" ? str : `?${str}`;
 };
 
 function getQueryNavigation(locationString, newQuery) {
-  if (!locationString) return '';
+  if (!locationString) return "";
 
   const baseUrl = new URL(locationString);
-  const query = newQuery ? `${ensureLeadingQuestion(newQuery)}` : '';
+  const query = newQuery ? `${ensureLeadingQuestion(newQuery)}` : "";
 
   return `${baseUrl.pathname}${query}${baseUrl.hash}`;
 }
 
 function isBrowser() {
   return !!(
-    typeof window !== 'undefined' &&
+    typeof window !== "undefined" &&
     window.document &&
     window.document.createElement
   );
@@ -156,6 +156,7 @@ function isBrowser() {
 
 export {
   cond,
+  ensureLeadingQuestion,
   getQueryNavigation,
   identity,
   isBrowser,

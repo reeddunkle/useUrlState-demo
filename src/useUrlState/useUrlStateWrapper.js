@@ -2,14 +2,17 @@ import useNavigate from "./useNavigate";
 import useSearchParams from "./useSearchParams";
 import useUrlState from "./useUrlState";
 
-import { isFunction } from "./util";
+import { getQueryNavigation, isFunction } from "./util";
 
 function useUrlStateWrapper(initialState = {}, options = {}) {
   const navigate = useNavigate();
   const searchParams = useSearchParams();
   const searchString = searchParams.toString();
 
-  const onStateChange = navigate;
+  const onStateChange = (query, ...rest) => {
+    const targetUrl = getQueryNavigation(window?.location.toString(), query);
+    navigate(targetUrl, ...rest);
+  };
 
   const [urlState, setUrlState] = useUrlState(
     initialState,

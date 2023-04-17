@@ -1,11 +1,11 @@
 import { useCallback, useMemo, useRef } from "react";
 
-import { getQueryNavigation, isFunction, queryString } from "./util";
+import { ensureLeadingQuestion, isFunction, queryString } from "./util";
 
 function useUrlState(
   initialState = {},
   onStateChange,
-  searchString,
+  searchString = "",
   options = {}
 ) {
   const serialize = useMemo(() => {
@@ -32,17 +32,14 @@ function useUrlState(
   }, [deserialize, searchString]);
 
   const setUrlState = useCallback(
-    (nextState, stateChangeOptions) => {
+    (nextState, ...rest) => {
       const query = serialize(
         isFunction(nextState) ? nextState(urlState) : nextState
       );
 
       hasInitRef.current = true;
 
-      onStateChange(
-        getQueryNavigation(window?.location.toString(), query),
-        stateChangeOptions
-      );
+      onStateChange(ensureLeadingQuestion(query), ...rest);
     },
     [onStateChange, serialize, urlState]
   );
