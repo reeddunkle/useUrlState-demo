@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useRef } from "react";
 
-import { ensureLeadingQuestion, isFunction, queryString } from "./util";
+import { ensureLeadingQuestion, isFunction, queryString, noop } from "./util";
 
 function useUrlState(
   initialState = {},
-  onStateChange,
+  onStateChange = noop,
   searchString = "",
   options = {}
 ) {
